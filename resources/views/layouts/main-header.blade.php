@@ -3,10 +3,10 @@
 				<div class="container-fluid">
 					<div class="main-header-left ">
 						<div class="responsive-logo">
-							<a href="{{ url('/' . $page='index') }}"><img src="{{URL::asset('assets/img/brand/logo.png')}}" class="logo-1" alt="logo"></a>
-							<a href="{{ url('/' . $page='index') }}"><img src="{{URL::asset('assets/img/brand/logo-white.png')}}" class="dark-logo-1" alt="logo"></a>
-							<a href="{{ url('/' . $page='index') }}"><img src="{{URL::asset('assets/img/brand/favicon.png')}}" class="logo-2" alt="logo"></a>
-							<a href="{{ url('/' . $page='index') }}"><img src="{{URL::asset('assets/img/brand/favicon.png')}}" class="dark-logo-2" alt="logo"></a>
+							<a href="{{ url('/' . $page='index') }}"><img src="{{URL::asset('assets/img/brand/Screenshot (1064).png')}}" class="logo-1" alt="logo"></a>
+							<a href="{{ url('/' . $page='index') }}"><img src="{{URL::asset('assets/img/brand/Screenshot (1064).png')}}" class="dark-logo-1" alt="logo"></a>
+							<a href="{{ url('/' . $page='index') }}"><img src="{{URL::asset('assets/img/brand/Screenshot (1064).png')}}" class="logo-2" alt="logo"></a>
+							<a href="{{ url('/' . $page='index') }}"><img src="{{URL::asset('assets/img/brand/Screenshot (1064).png')}}" class="dark-logo-2" alt="logo"></a>
 						</div>
 						<div class="app-sidebar__toggle" data-toggle="sidebar">
 							<a class="open-toggle" href="#"><i class="header-icon fe fe-align-left" ></i></a>
@@ -94,7 +94,7 @@
 											</div>
 											<div class="wd-90p">
 												<div class="d-flex">
-													<h5 class="mb-1 name">Petey Cruiser</h5>
+													<h5 class="mb-1 name">abrar</h5>
 												</div>
 												<p class="mb-0 desc">I'm sorry but i'm not sure how to help you with that......</p>
 												<p class="time mb-0 text-left float-right mr-2 mt-2">Mar 15 3:55 PM</p>
@@ -254,7 +254,7 @@
 										<div class="d-flex wd-100p">
 											<div class="main-img-user"><img alt="" src="{{URL::asset('assets/img/faces/6.jpg')}}" class=""></div>
 											<div class="mr-3 my-auto">
-												<h6>Petey Cruiser</h6><span>Premium Member</span>
+												<h6>{{Auth::User()->name}}</h6><span>{{Auth::User()->email}}</span>
 											</div>
 										</div>
 									</div>
