@@ -32,6 +32,6 @@ class BlockController extends Controller
 
     $user->save();
 
-    return redirect()->route('block.store');
+    return redirect()->route('block.store');// block users
 }
         }
