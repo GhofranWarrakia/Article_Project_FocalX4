@@ -30,8 +30,8 @@ class BlockController extends Controller
     $user->blocker_id = $request->blocker_id;
     $user->blocked_id = $request->blocked_id;
 
-    $user->save();
+    $user->save(); //save information
 
-    return redirect()->route('block.store');// block users
+    return redirect()->route('block.store');// block users route
 }
         }
