@@ -17,8 +17,8 @@ return new class extends Migration
             $table->string('title');
             $table->string('photo')->nullable();
             $table->string('body')->nullable();
-            $table->foreignId('user_id')->default(1)->constrained('users');
-            $table->foreignId('category_id')->default(1)->constrained('categories');
+            $table->foreignId('user_id')->constrained('users')->cascadeOnDelete();
+            $table->foreignId('category_id')->constrained('categories')->cascadeOnDelete();
         });
     }
 

@@ -1,65 +1,65 @@
 <?php
-
 namespace App\Http\Controllers;
 
+use App\Models\Article;
 use App\Models\Category;
 use Illuminate\Http\Request;
 
 class CategoryController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
-        //
+        $articles = Article::all();
+        $categories = Category::all();
+        return view('graduation.category', compact('articles', 'categories'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
+    // public function create()
+    // {
+    //     return view('categories.create');
+    // }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name' => 'required|string|max:255|unique:categories',
+        ]);
+
+        Category::create([
+            'name' => $request->name,
+        ]);
+
+        session()->flash('Add', 'تمت إضافة التصنيف بنجاح');
+        return redirect('/categories');
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Category $category)
+    public function update(Request $request)
     {
-        //
+        $id = $request->id;
+
+        $request->validate([
+            'name' => 'required|string|max:255|unique:categories,name,' . $id,
+        ], [
+            'name.required' => 'يرجى ادخال اسم التصنيف',
+            'name.max' => 'لا يمكن ادخال اكثر من 255 حرف',
+            'name.unique' => 'اسم التصنيف موجود بالفعل',
+        ]);
+
+        $category = Category::findOrFail($id);
+        $category->update([
+            'name' => $request->name,
+        ]);
+
+        session()->flash('edit', 'تم تعديل معلومات التصنيف بنجاح');
+        return redirect('/categories');
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Category $category)
+    public function destroy(Request $request)
     {
-        //
-    }
+        $id = $request->id;
+        Category::findOrFail($id)->delete();
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Category $category)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Category $category)
-    {
-        //
+        session()->flash('delete', 'تم حذف التصنيف بنجاح');
+        return redirect('/categories');
     }
 }

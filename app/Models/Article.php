@@ -11,12 +11,13 @@ class Article extends Model
 
     protected $fillable = [
         'title',
-        'photo',
-        'body',
-        'user_id',
         'category_id',
+        'user_id',
+        'body',
+        'photo',
 
     ];
+    // protected $guarded =[];
 
     public function category()
     {

@@ -16,20 +16,23 @@ class Controller extends BaseController
 
     public function index()
     {
-        return view('graduation.users');
+        $user=User::all();
+        return view('graduation.users',compact('user'));
     }
 
     public function store(Request $request)
     {   
-        // return $request;
+    $validateData=$request->validate([
+ 'name'=>'required|unique:users|max:255',
+ 'email'=>'required|unique:users|max:255',
 
-        $input = $request->all();
-
-        $b_exists = User::where('national_number', '=', $input['national_number'])->exists();
-    if($b_exists){
-        session()->flash('Error', 'خطأ إن المستخدم موجود مسبقاً');
-        return redirect('users');
-    } 
+    ],[
+        'name.required'=>' يرجى ادخال اسم المستخدم',
+        'name.unique'=>' المستخدم موجود مسبقا',
+        'name.max'=>' لا يمكن ادخال اكثر من 255 حرف '  ,
+        'email.unique'=>' الايميل موجود مسبقا',
+        'email.required'=>' يرجى ادخال الايميل',
+    ]);
 
     $user = new User();
     $user->name = $request->name;
@@ -40,6 +43,43 @@ class Controller extends BaseController
 
     $user->save();
 
-    return redirect()->route('users.store');
+    session()->flash('Add','تم إضافة المستخدم بنجاح ');
+    return redirect()->route('users.index');
 }
-        }
+
+public function Update(Request $request){
+
+    
+    $id = $request->id;
+
+    $this->validate($request,[
+        'name'=>'required|max:255'.$id,
+        'email'=>'required|max:255',
+       
+           ],[
+               'name.required'=>' يرجى ادخال اسم المستخدم',
+               'name.max'=>' لا يمكن ادخال اكثر من 255 حرف '  ,
+               'email.required'=>' يرجى ادخال الايميل',
+           ]);
+
+    $user = User::find($id);
+    $user->update([
+        'name' => $request->name,
+        'national_number' => $request->national_number,
+        'country' => $request->country,
+        'email' => $request->email,
+
+    ]);
+
+    session()->flash('edit','تم تعديل معلومات المستخدم بنجاج');
+    return redirect('/users');
+}
+
+public function destroy(Request $request)
+{
+    $id = $request->id;
+    User::find($id)->delete();
+    session()->flash('delete','تم حذف القسم بنجاح');
+    return redirect('/user');
+}
+}
