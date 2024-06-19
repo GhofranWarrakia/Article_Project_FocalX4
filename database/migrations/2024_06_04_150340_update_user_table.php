@@ -14,6 +14,8 @@ return new class extends Migration
         Schema::table('users', function (Blueprint $table) {
             $table->string('national_number')->after('id')->nullable;
             $table->string('country')->after('national_number')->nullable;
+            $table->text('roles_name')->after('password')->default('user');
+            $table->string('status',10)->after('roles_name')->default('مفعل');
         });
     }
 
@@ -25,6 +27,8 @@ return new class extends Migration
         Schema::table('users', function (Blueprint $table) {
             $table->dropColumn('country');
             $table->dropColumn('national_number');
+            $table->dropColumn('roles_name');
+            $table->dropColumn('status');
         });
     }
 };

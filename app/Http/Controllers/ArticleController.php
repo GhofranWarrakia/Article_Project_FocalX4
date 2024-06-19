@@ -74,7 +74,8 @@ class ArticleController extends Controller
     public function update(Request $request)
     {
         // العثور على التصنيف بناءً على اسم التصنيف
-        $category = Category::where('name', $request->category_name)->first();
+        // $category = Category::where('name', $request->category_id)->first();
+        $category = Category::find($request->category_id);
         if (!$category) {
             // إذا لم يتم العثور على التصنيف، ارجع برد خطأ
             session()->flash('Error', 'التصنيف غير موجود');
