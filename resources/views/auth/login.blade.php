@@ -66,13 +66,28 @@
                                                          color: #FFFFFF; /* White text */
                                                          border-color: #000000; /* Red border */
                                                      }
+
+													 .btn-main-primary:hover {
+                                                     background-color: #000000; /* Black background on hover */
+                                                     color: #FFFFFF; /* White text */
+													 border-color: #000000 !important;
+                                                    }
+													.btn-main-primary:active {
+                                                     background-color: #ff9900  !important; /* Orange background on click */
+                                                     color: #FFFFFF; /* White text */
+													 border-color: #000000 !important;
+                                                    }
                                                  </style>
 
 
-                                                    <button type="submit" class="btn btn-main-primary btn-block" >
+                                                    <button type="submit" class="btn btn-main-primary btn-block"
+													
+													>
                                                     {{ __('تسجيل الدخول') }}
                                                     </button>
 												</form>
+
+
 											</div>
 										</div>
 									</div>

@@ -83,6 +83,8 @@
                                 <th class="border-bottom-0">الرقم الوطني</th>
                                 <th class="border-bottom-0">الدولة</th>
                                 <th class="border-bottom-0">الايميل</th>
+                                <th class="border-bottom-0">حالة المستخدم</th>
+                                <th class="border-bottom-0">نوع المستخدم </th>
                                 <th class="border-bottom-0">الاجراءات</th>
                             </tr>
                         </thead>
@@ -96,6 +98,14 @@
                                     <td>{{ $users->national_number }}</td>
                                     <td>{{ $users->country }}</td>
                                     <td>{{ $users->email }}</td>
+                                    <td>{{ $users->status }}</td>
+                                    <td>
+                                        @if(is_array($users->roles_name))
+                                            {{ implode(', ', $users->roles_name) }}
+                                        @else
+                                            {{ $users->roles_name }}
+                                        @endif
+                                    </td>
                                     <td>
                                         <a class="modal-effect btn btn-sm btn-info" data-effect="effect-scale"
                                            data-id="{{ $users->id }}" data-name="{{ $users->name }}"
@@ -144,6 +154,36 @@
                             <div class="form-group">
                                 <label for="exampleInputEmail">الدولة</label>
                                 <input type="text" class="form-control" id="country" name="country" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputEmail">حالة المستخدم</label>
+                                {{-- <input type="text" class="form-control" id="country" name="country" required> --}}
+                                <select name="status" id="select-beast" class="form-control  nice-select  custom-select">
+                                    <option value="مفعل">مفعل</option>
+                                    <option value="غير مفعل">غير مفعل</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputEmail">صلاحية المستخدم</label>
+                                {{-- <input type="text" class="form-control" id="country" name="country" required> --}}
+                                {{-- {!! Form::select('roles_name[]', $roles,[], ['class' => 'form-control', 'multiple']) !!} --}}
+                                {{-- {!! Form::select('roles_name[]', $roles, [], ['class' => 'form-control', 'multiple']) !!} --}}
+                                {{-- <label for="exampleInputEmail">صلاحية المستخدم</label>
+                                <select name="roles_name[]" class="form-control" multiple>
+                                @foreach($roles as $roleId => $roleName)
+                                <option value="{{ $roleId }}">{{ $roleName }}</option>
+                                @endforeach
+                                </select>
+                                --}}
+                                <select name="roles_name[]" class="form-control" multiple>
+                                @foreach($roles as $roleId => $roleName)
+                                    <option value="{{ $roleId }}" {{ in_array($roleId, old('roles_name', [])) ? 'selected' : '' }}>{{ $roleName }}</option>
+                                @endforeach
+                            </select>
+                            {{-- @foreach($users->roles_name as $role)
+                            {{ $role->name }}
+                        @endforeach --}}
+                        
                             </div>
                             <div class="modal-footer">
                                 <button class="btn ripple btn-primary" type="submit">تأكيد</button>
