@@ -1,29 +1,164 @@
-<!-- main-sidebar -->
-		<div class="app-sidebar__overlay" data-toggle="sidebar"></div>
-		<aside class="app-sidebar sidebar-scroll">
-			<div class="main-sidebar-header active">
-				<a class="desktop-logo logo-light active" href="{{ url('/' . $page='index') }}"><img src="{{URL::asset('assets/img/brand/Screenshot (1074).png')}}" class="main-logo" alt="logo"></a>
-				<a class="desktop-logo logo-dark active" href="{{ url('/' . $page='index') }}"><img src="{{URL::asset('assets/img/brand/Screenshot (1074).png')}}" class="main-logo dark-theme" alt="logo"></a>
-				<a class="logo-icon mobile-logo icon-light active" href="{{ url('/' . $page='index') }}"><img src="{{URL::asset('assets/img/brand/Screenshot (1074).png')}}" class="logo-icon" alt="logo"></a>
-				<a class="logo-icon mobile-logo icon-dark active" href="{{ url('/' . $page='index') }}"><img src="{{URL::asset('assets/img/brand/Screenshot (1074).png')}}" class="logo-icon dark-theme" alt="logo"></a>
-			</div>
-			<div class="main-sidemenu">
-				<div class="app-sidebar__user clearfix">
-					<div class="dropdown user-pro-body">
-						<div class="">
-							<img alt="user-img" class="avatar avatar-xl brround" src="{{URL::asset('assets/img/faces/6.jpg')}}"><span class="avatar-status profile-status bg-green"></span>
-						</div>
-						<div class="user-info">
-							<h4 class="font-weight-semibold mt-3 mb-0">{{Auth::User()->name}}</h4>
-							<span class="mb-0 text-muted">{{Auth::User()->email}}</span>
-						</div>
-					</div>
-				</div>
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menu</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+        .app-sidebar {
+            width: 250px;
+            background-color: white; /* تغيير اللون إلى الأبيض */
+            color: black; /* تغيير لون النص إلى الأسود */
+            position: fixed;
+            height: 100%;
+            overflow-y: auto;
+            border-right: 1px solid #e0e0e0; /* إضافة خط فاصل */
+        }
+        .main-sidebar-header {
+            padding: 20px;
+            text-align: center;
+        }
+        .main-sidemenu {
+            padding: 20px;
+        }
+        .app-sidebar__user {
+            margin-bottom: 20px;
+            padding: 15px;
+            background-color: #f8f9fa; /* تغيير اللون إلى لون فاتح */
+            border-radius: 10px;
+        }
+        .avatar {
+            border-radius: 50%;
+            margin-right: 10px;
+        }
+        .user-info {
+            display: inline-block;
+        }
+        .side-menu {
+            list-style-type: none;
+            padding: 0;
+        }
+        .side-item {
+            margin-bottom: 20px;
+        }
+        .side-item-category {
+            font-size: 16px;
+            font-weight: bold;
+            margin: 10px 0;
+            color: #333; /* تغيير لون النص إلى لون داكن */
+        }
+        .slide {
+            cursor: pointer;
+        }
+        .side-menu__item {
+            display: flex;
+            align-items: center;
+            padding: 10px;
+            text-decoration: none;
+            color: #333; /* تغيير لون النص إلى لون داكن */
+            transition: background-color 0.3s;
+        }
+        .side-menu__item:hover {
+            background-color: #f1f1f1; /* تغيير لون الخلفية عند التمرير */
+        }
+        .side-menu__icon {
+            margin-right: 10px;
+        }
+        .slide-menu {
+            display: none;
+            list-style-type: none;
+            padding-left: 20px;
+        }
+        .slide-item {
+            padding: 10px;
+            text-decoration: none;
+            color: #333; /* تغيير لون النص إلى لون داكن */
+            display: block;
+            transition: background-color 0.3s;
+        }
+        .slide-item:hover {
+            background-color: #f1f1f1; /* تغيير لون الخلفية عند التمرير */
+        }
+        .angle {
+            margin-left: auto;
+            transition: transform 0.3s;
+        }
+        .slide.open .angle {
+            transform: rotate(90deg);
+        }
+        .slide.open .slide-menu {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <aside class="app-sidebar sidebar-scroll">
+        <div class="main-sidebar-header active">
+            <a class="desktop-logo logo-light active" href="{{ url('/' . $page='index') }}">
+                <img src="{{ URL::asset('assets/img/brand/Screenshot (1074).png') }}" class="main-logo" alt="logo">
+            </a>
+        </div>
+
+        <div class="main-sidemenu">
+            <div class="app-sidebar__user clearfix">
+                <div class="dropdown user-pro-body">
+                    <div class="">
+                        <img alt="user-img" class="avatar avatar-xl brround" src="{{ URL::asset('assets/img/faces/6.jpg') }}">
+                        <span class="avatar-status profile-status bg-green"></span>
+                    </div>
+                    <div class="user-info">
+                        @if(Auth::check())
+                            <h4>{{ Auth::user()->name }}</h4>
+                            <span>{{ Auth::user()->email }}</span>
+                        @endif
+                    </div>
+                </div>
+            </div>
+                <ul class="side-menu">
+					<li class="side-item side-item-category"> الحسابات </li>
+					
+            <li class="slide">
+                <a class="side-menu__item" data-toggle="slide" href="{{ url('/' . $page='#') }}">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="side-menu__icon" viewBox="0 0 24 24">
+                        <path d="M0 0h24v24H0V0z" fill="none"/>
+                        <path d="M3 13h8V3H3v10zm2-8h4v6H5V5zm8 16h8V11h-8v10zm2-8h4v6h-4v-6zM13 3v6h8V3h-8zm6 4h-4V5h4v2zM3 21h8v-6H3v6zm2-4h4v2H5v-2z"/>
+                    </svg>
+                    <span class="side-menu__label">إدارة الحساب</span>
+                    <i class="angle fe fe-chevron-down"></i>
+                </a>
+                <ul class="slide-menu">
+				<li><a class="slide-item" href="{{ url('/' . $page='register') }}">إضافة حساب</a></li>
+                    <li><a class="slide-item" href="{{ url('/' . $page='login') }}">تسجيل الدخول</a></li>
+                    
+                </ul>
+            </li>
 				<ul class="side-menu">
 					<li class="side-item side-item-category">الخيارات الرئيسية</li>
-					<li class="slide">
-						<a class="side-menu__item" href="{{ url('/' . $page='home') }}"><svg xmlns="http://www.w3.org/2000/svg" class="side-menu__icon" viewBox="0 0 24 24" ><path d="M0 0h24v24H0V0z" fill="none"/><path d="M5 5h4v6H5zm10 8h4v6h-4zM5 17h4v2H5zM15 5h4v2h-4z" opacity=".3"/><path d="M3 13h8V3H3v10zm2-8h4v6H5V5zm8 16h8V11h-8v10zm2-8h4v6h-4v-6zM13 3v6h8V3h-8zm6 4h-4V5h4v2zM3 21h8v-6H3v6zm2-4h4v2H5v-2z"/></svg><span class="side-menu__label">الصفحة الرئيسية</span></a>
-					</li>
+				
+					
+            <li class="slide">
+                <a class="side-menu__item" data-toggle="slide" href="{{ url('/' . $page='#') }}">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="side-menu__icon" viewBox="0 0 24 24">
+                        <path d="M0 0h24v24H0V0z" fill="none"/>
+                        <path d="M3 13h8V3H3v10zm2-8h4v6H5V5zm8 16h8V11h-8v10zm2-8h4v6h-4v-6zM13 3v6h8V3h-8zm6 4h-4V5h4v2zM3 21h8v-6H3v6zm2-4h4v2H5v-2z"/>
+                    </svg>
+                    <span class="side-menu__label">الخيارات</span>
+                    <i class="angle fe fe-chevron-down"></i>
+                </a>
+                <ul class="slide-menu">
+				<li><a class="slide-item" href="{{ url('/' . $page='home') }}">الصفحة الرئيسة </a></li>
+                    <li><a class="slide-item" href="{{ url('/' . $page='article') }}">قائمة المقالات</a></li>
+                    <li><a class="slide-item" href="{{ url('/' . $page='writers') }}">قائمة الكتّاب</a></li>
+                </ul>
+            </li>
+
 					{{-- @can('برنامج') --}}
 					<li class="side-item side-item-category">برنامج الادارة</li>
 					
@@ -37,10 +172,11 @@
 			
 						</ul>
 					</li>
+
 					{{-- @endcan --}}
 					<li class="side-item side-item-category">طلبات الترقية</li>
 					<li class="slide">
-						<a class="side-menu__item" data-toggle="slide" href="{{ url('/' . $page='#') }}"><svg xmlns="http://www.w3.org/2000/svg" class="side-menu__icon" viewBox="0 0 24 24"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M4 12c0 4.08 3.06 7.44 7 7.93V4.07C7.05 4.56 4 7.92 4 12z" opacity=".3"/><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.94-.49-7-3.85-7-7.93s3.05-7.44 7-7.93v15.86zm2-15.86c1.03.13 2 .45 2.87.93H13v-.93zM13 7h5.24c.25.31.48.65.68 1H13V7zm0 3h6.74c.08.33.15.66.19 1H13v-1zm0 9.93V19h2.87c-.87.48-1.84.8-2.87.93zM18.24 17H13v-1h5.92c-.2.35-.43.69-.68 1zm1.5-3H13v-1h6.93c-.04.34-.11.67-.19 1z"/></svg><span class="side-menu__label">طلبات المستخدمين</span><i class="angle fe fe-chevron-down"></i></a>
+						<a class="side-menu__item" data-toggle="slide" href="{{ url('/' . $page='#') }}"><svg xmlns="http://www.w3.org/2000/svg" class="side-menu__icon" viewBox="0 0 24 24"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M4 12c0 4.08 3.06 7.44 7 7.93V4.07C7.05 4.56 4 7.92 4 12z" opacity=".3"/><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.94-.49-7-3.85-7-7.93s3.05-7.44 7-7.93v15.86zm2-15.86c1.03.13 2 .45 2.87.93H13v-.93zM13 7h5.24c.25.31.48.65.68 1H13V7zm0 3h6.74c.08.33.15.66.19 1H13v-1zm0 9.93V19h2.87c-.87.48-1.84.8-2.87.93zM18.24 17H13v-1h5.92c-.2.35-.43.69-.68 1zm1.5-3H13v-1h6.93c-.04.34-.11.67-.19 1z"/></svg><span class="side-menu__label">إدارة الطلبات  </span><i class="angle fe fe-chevron-down"></i></a>
 						<ul class="slide-menu">
 							<li><a class="slide-item" href="{{ url('/' . $page='cards') }}">مراجعة طلبات الترقية</a></li>
 						</ul>
@@ -51,7 +187,6 @@
 						<a class="side-menu__item" data-toggle="slide" href="{{ url('/' . $page='#') }}"><svg xmlns="http://www.w3.org/2000/svg" class="side-menu__icon" viewBox="0 0 24 24" ><path d="M0 0h24v24H0V0z" fill="none"/><path d="M15 11V4H4v8.17l.59-.58.58-.59H6z" opacity=".3"/><path d="M21 6h-2v9H6v2c0 .55.45 1 1 1h11l4 4V7c0-.55-.45-1-1-1zm-5 7c.55 0 1-.45 1-1V3c0-.55-.45-1-1-1H3c-.55 0-1 .45-1 1v14l4-4h10zM4.59 11.59l-.59.58V4h11v7H5.17l-.58.59z"/></svg><span class="side-menu__label">ترقية إلى كاتب محتوى</span><i class="angle fe fe-chevron-down"></i></a>
 						<ul class="slide-menu">
 							<li><a class="slide-item" href="{{ url('/' . $page='mail') }}">فورم تقديم الطلبات</a></li>
-							
 						</ul>
 					</li>
 					
@@ -92,7 +227,9 @@
         .side-menu__item {
             cursor: pointer;
         }
+        
     </style>
+    
 </head>
 <body>
 <ul class="side-menu">
@@ -134,6 +271,8 @@
         </li>
     </ul>
 
+	
+
     <script>
         function toggleSubMenu(event) {
             var subMenu = event.target.nextElementSibling;
@@ -144,10 +283,17 @@
             }
         }
     </script>
+    <script>
+        document.querySelectorAll('.side-menu__item[data-toggle="slide"]').forEach(item => {
+            item.addEventListener('click', () => {
+                const parent = item.closest('.slide');
+                parent.classList.toggle('open');
+            });
+        });
+    </script>
+
 </body>
 </html>
-
-
 						</ul>
 					</li>
 				</ul>

@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
-// use Illuminate\Support\Facades\Request;
 use Spatie\Permission\Models\Role;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Hash;
@@ -24,7 +23,7 @@ class Controller extends BaseController
     }
 
     public function store(Request $request)
-    {   
+    {  
 
         // dd($request->all());
 

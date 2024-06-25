@@ -2,8 +2,10 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\Article;
+use Illuminate\Foundation\Auth\User;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Comment extends Model
 {
@@ -15,14 +17,13 @@ class Comment extends Model
         'article_id',
     ];
 
-    public function commenter()
+    public function article()
     {
-        return $this->belongsTo(User::class, 'user_id', 'id');
+        return $this->belongsTo(Article::class);
     }
 
-    public function article_comment()
+    public function user()
     {
-        return $this->belongsTo(Article::class, 'article_id', 'id');
+        return $this->belongsTo(User::class);
     }
-
 }

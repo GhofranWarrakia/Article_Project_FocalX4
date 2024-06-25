@@ -9,7 +9,9 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\BlockController;
 use App\Http\Controllers\ArticleController;
+use App\Http\Controllers\CommentController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\FavoriteController;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,7 +25,7 @@ use App\Http\Controllers\CategoryController;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('home');
 });
 
 Auth::routes();
@@ -32,12 +34,28 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 Route::resource('users',Controller::class);
 
-// Route::resource('block',BlockController::class);
 Route::resource('article',ArticleController::class);
 
 Route::resource('category',ArticleController::class);
 
 Route::resource('categories', CategoryController::class);
+
+Route::post('/article/{id}', [ArticleController::class, 'storeWithId'])->name('article.storeWithId');
+Route::post('/article', [ArticleController::class, 'index2'])->name('article.index2');
+
+Route::get('/article/{id}', [ArticleController::class, 'show'])->name('articles.show');
+Route::post('/article/{id}/comment', [CommentController::class, 'store'])->name('comment.store');
+
+Route::patch('/comments/{comment}', [CommentController::class, 'update'])->name('comments.update');
+Route::delete('/comments/{comment}', [CommentController::class, 'destroy'])->name('comments.destroy');
+
+Route::post('article/{id}/favorite', [FavoriteController::class, 'addFavorite'])->name('article.favorite');
+Route::post('article/{id}/unfavorite', [FavoriteController::class, 'removeFavorite'])->name('article.unfavorite');
+
+Route::post('/favorite/{article}', [FavoriteController::class, 'store'])->name('favorite.store');
+Route::delete('/favorite/{article}', [FavoriteController::class, 'destroy'])->name('favorite.destroy');
+
+
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/block', [BlockController::class, 'index'])->name('block.index');

@@ -3,6 +3,7 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+use App\Models\Article;
 use Laravel\Sanctum\HasApiTokens;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Traits\HasRoles;
@@ -61,6 +62,11 @@ public function blockedUsers()
         return $this->hasMany(Block::class, 'blocker_id');
     }
 
+    public function favorites()
+    {
+        return $this->belongsToMany(Article::class, 'favorites');
+    }
+    
 
     protected $guarded = [];
 

@@ -24,16 +24,17 @@ class CategoryController extends Controller
         $request->validate([
             'name' => 'required|string|max:255|unique:categories',
         ]);
-
+    
         Category::create([
             'name' => $request->name,
         ]);
-
-        session()->flash('Add', 'تمت إضافة التصنيف بنجاح');
-        return redirect('/categories');
+    
+        return redirect()->route('categories.index')
+                         ->with('success', 'Category created successfully.');
     }
+    
 
-    public function update(Request $request)
+    public function update(Request $request,$id)
     {
         $id = $request->id;
 

@@ -254,8 +254,12 @@
 										<div class="d-flex wd-100p">
 											<div class="main-img-user"><img alt="" src="{{URL::asset('assets/img/faces/6.jpg')}}" class=""></div>
 											<div class="mr-3 my-auto">
-												<h6>{{Auth::User()->name}}</h6><span>{{Auth::User()->email}}</span>
+											@if(Auth::check())
+                            <h6>{{ Auth::user()->name }}</h6>
+                            <span>{{ Auth::user()->email }}</span>
+                        @endif
 											</div>
+
 										</div>
 									</div>
 									<a class="dropdown-item" href=""><i class="bx bx-user-circle"></i>Profile</a>

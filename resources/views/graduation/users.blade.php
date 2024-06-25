@@ -88,7 +88,7 @@
                                 <th class="border-bottom-0">الاجراءات</th>
                             </tr>
                         </thead>
-                        <tbody>
+                       <tbody>
                             <?php $i = 0; ?>
                             @foreach($user as $users)
                                 <?php $i++; ?>
@@ -157,7 +157,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="exampleInputEmail">حالة المستخدم</label>
-                                {{-- <input type="text" class="form-control" id="country" name="country" required> --}}
+                             
                                 <select name="status" id="select-beast" class="form-control  nice-select  custom-select">
                                     <option value="مفعل">مفعل</option>
                                     <option value="غير مفعل">غير مفعل</option>
