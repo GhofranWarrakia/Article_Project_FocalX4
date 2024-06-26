@@ -12,6 +12,8 @@ use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\FavoriteController;
+use App\Http\Controllers\RoleRequestController;
+use App\Http\Controllers\AdminRoleRequestController;
 
 /*
 |--------------------------------------------------------------------------
@@ -32,28 +34,28 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Route::resource('users',Controller::class);
+// Route::resource('users',Controller::class);
 
-Route::resource('article',ArticleController::class);
+// Route::resource('article',ArticleController::class);
 
-Route::resource('category',ArticleController::class);
+// Route::resource('category',ArticleController::class);
 
-Route::resource('categories', CategoryController::class);
+// Route::resource('categories', CategoryController::class);
 
-Route::post('/article/{id}', [ArticleController::class, 'storeWithId'])->name('article.storeWithId');
-Route::post('/article', [ArticleController::class, 'index2'])->name('article.index2');
+// Route::post('/article/{id}', [ArticleController::class, 'storeWithId'])->name('article.storeWithId');
+// Route::post('/article', [ArticleController::class, 'index2'])->name('article.index2');
 
 Route::get('/article/{id}', [ArticleController::class, 'show'])->name('articles.show');
 Route::post('/article/{id}/comment', [CommentController::class, 'store'])->name('comment.store');
 
-Route::patch('/comments/{comment}', [CommentController::class, 'update'])->name('comments.update');
-Route::delete('/comments/{comment}', [CommentController::class, 'destroy'])->name('comments.destroy');
+// Route::patch('/comments/{comment}', [CommentController::class, 'update'])->name('comments.update');
+// Route::delete('/comments/{comment}', [CommentController::class, 'destroy'])->name('comments.destroy');
 
-Route::post('article/{id}/favorite', [FavoriteController::class, 'addFavorite'])->name('article.favorite');
-Route::post('article/{id}/unfavorite', [FavoriteController::class, 'removeFavorite'])->name('article.unfavorite');
+// Route::post('article/{id}/favorite', [FavoriteController::class, 'addFavorite'])->name('article.favorite');
+// Route::post('article/{id}/unfavorite', [FavoriteController::class, 'removeFavorite'])->name('article.unfavorite');
 
-Route::post('/favorite/{article}', [FavoriteController::class, 'store'])->name('favorite.store');
-Route::delete('/favorite/{article}', [FavoriteController::class, 'destroy'])->name('favorite.destroy');
+// Route::post('/favorite/{article}', [FavoriteController::class, 'store'])->name('favorite.store');
+// Route::delete('/favorite/{article}', [FavoriteController::class, 'destroy'])->name('favorite.destroy');
 
 
 
@@ -68,6 +70,32 @@ Route::middleware(['auth'])->group(function () {
 
 Route::group(['middleware' => ['auth']], function () {
     // Route::resource('roles', RoleController::class);
+
+
+    Route::resource('users',Controller::class);
+
+    Route::resource('article',ArticleController::class);
+
+    Route::resource('category',ArticleController::class);
+
+    Route::resource('categories', CategoryController::class);
+
+    Route::post('/article/{id}', [ArticleController::class, 'storeWithId'])->name('article.storeWithId');
+    Route::post('/article', [ArticleController::class, 'index2'])->name('article.index2');
+
+    Route::patch('/comments/{comment}', [CommentController::class, 'update'])->name('comments.update');
+    Route::delete('/comments/{comment}', [CommentController::class, 'destroy'])->name('comments.destroy');
+
+    Route::post('article/{id}/favorite', [FavoriteController::class, 'addFavorite'])->name('article.favorite');
+    Route::post('article/{id}/unfavorite', [FavoriteController::class, 'removeFavorite'])->name('article.unfavorite');
+
+    Route::post('/favorite/{article}', [FavoriteController::class, 'store'])->name('favorite.store');
+    Route::delete('/favorite/{article}', [FavoriteController::class, 'destroy'])->name('favorite.destroy');
+
+
+
+
+
     Route::get('roles', [RoleController::class, 'index'])->name('roles.index');
     Route::get('roles/create', [RoleController::class, 'create'])->name('roles.create');
     Route::post('roles', [RoleController::class, 'store'])->name('roles.store');
@@ -79,6 +107,12 @@ Route::group(['middleware' => ['auth']], function () {
     Route::resource('users', Controller::class); // Example middleware usage
 
 });
+
+Route::get('/role-request', [RoleRequestController::class, 'showForm'])->name('role.request.form');
+Route::post('/role-request', [RoleRequestController::class, 'submitForm'])->name('role.request');
+
+Route::get('/admin/role-requests', [AdminRoleRequestController::class, 'index'])->name('admin.role.requests');
+Route::post('/admin/role-requests/{id}', [AdminRoleRequestController::class, 'handleRequest'])->name('role.request.handle');
 
 Route::get('/{page}',  [App\Http\Controllers\AdminController::class, 'index']);
 
