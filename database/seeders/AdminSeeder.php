@@ -12,60 +12,6 @@ use Illuminate\Support\Facades\DB;
 
 class AdminSeeder extends Seeder
 {
-    // /**
-    //  * Run the database seeds.
-    //  */
-    // public function run(): void
-    // {   
-    //     // User::truncate();
-    //     DB::statement('SET FOREIGN_KEY_CHECKS=0;');
-
-    //     // Truncate the tables
-    //     DB::table('articles')->truncate();
-    //     DB::table('users')->truncate();
-
-    //     // Enable foreign key checks
-    //     DB::statement('SET FOREIGN_KEY_CHECKS=1;');
-
-    //     $user = User::create([
-    //         'name'=>'Abrar',
-    //         'email'=>'roro@gmail.com',
-    //         'password'=>Hash::make('abrar1234'),
-    //         'national_number' => '1234567890',
-    //         'country' => 'YourCountry',
-    //         'roles_name'=>['owner'],
-    //         'status'=>'مفعل'
-    //     ]);
-
-    //     $role = Role::create(['name' => 'owner']);
-
-    //     $permissions = Permission::pluck('id','id')->all();
-
-    //     $role->syncPermissions($permissions);
-
-    //     $user->assignRole([$role->id]);
-
-        
-    //     User::create([
-    //         'name'=>'Ahmad',
-    //         'email'=>'ahmad@gmail.com',
-    //         'password'=>Hash::make('ahmad1234'),
-    //         'national_number' => '0987654321',
-    //         'country' => 'YourCountry',
-    //         'roles_name'=>['Admin'],
-    //         'status'=>'مفعل'
-    //     ]);
-
-    //     $role = Role::create(['name' => 'Admin']);
-
-    //     $permissions = Permission::pluck('id','id')->all();
-
-    //     $role->syncPermissions($permissions);
-
-    //     $user->assignRole([$role->id]);
-    // }
-
-    // Disable foreign key checks
     public function run(): void
     { 
     DB::statement('SET FOREIGN_KEY_CHECKS=0;');
@@ -83,7 +29,7 @@ class AdminSeeder extends Seeder
         'email'=>'roro@gmail.com',
         'password'=>Hash::make('abrar1234'),
         'national_number' => '1234567890',
-        'country' => 'YourCountry',
+        'country' => 'Syria',
         'roles_name'=>['owner'],
         'status'=>'مفعل'
     ]);
@@ -104,13 +50,15 @@ class AdminSeeder extends Seeder
         'email'=>'ahmad@gmail.com',
         'password'=>Hash::make('ahmad1234'),
         'national_number' => '0987654321',
-        'country' => 'YourCountry',
+        'country' => 'Syria',
         'roles_name'=>['Admin'],
         'status'=>'مفعل'
     ]);
 
     // Check if the 'Admin' role already exists
     $adminRole = Role::firstOrCreate(['name' => 'Admin']);
+
+    $permissions = Permission::pluck('id','id')->all();
 
     // Sync permissions to the 'Admin' role
     $adminRole->syncPermissions($permissions);

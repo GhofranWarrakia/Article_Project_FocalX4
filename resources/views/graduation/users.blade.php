@@ -107,16 +107,21 @@
                                         @endif
                                     </td>
                                     <td>
+                                        @can('تعديل مستخدم')
                                         <a class="modal-effect btn btn-sm btn-info" data-effect="effect-scale"
                                            data-id="{{ $users->id }}" data-name="{{ $users->name }}"
                                            data-national_number="{{ $users->national_number }}" data-toggle="modal" href="#exampleModal2"
                                            data-country="{{ $users->country }}" data-email="{{ $users->email }}"
                                            data-password="{{ $users->password }}"
                                            title="تعديل"><i class="las la-pen"></i></a>
+                                           @endcan
                                            
+                                           @can('حذف مستخدم')
+
                                         <a class="modal-effect btn btn-sm btn-danger" data-effect="effect-scale"
                                            data-id="{{ $users->id }}" data-name="{{ $users->name }}" data-toggle="modal"
                                            href="#modaldemo9" title="حذف"><i class="las la-trash"></i></a>
+                                           @endcan
                                     </td>
                                 </tr>
                             @endforeach

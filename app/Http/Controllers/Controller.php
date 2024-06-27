@@ -10,10 +10,12 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
+use Spatie\Permission\Traits\HasRoles;
 
 class Controller extends BaseController
 {
-    use AuthorizesRequests, ValidatesRequests;
+    use AuthorizesRequests, ValidatesRequests,HasRoles;
+
 
     public function index()
     {
@@ -56,6 +58,7 @@ class Controller extends BaseController
     $user->status = $request->input('status','مفعل');
     $user->roles_name = $request->roles_name;
     $user->save();
+
 
 
     session()->flash('Add','تم إضافة المستخدم بنجاح ');
