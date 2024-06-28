@@ -4,6 +4,7 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use App\Models\Article;
+use App\Models\RoleRequest;
 use Laravel\Sanctum\HasApiTokens;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Traits\HasRoles;
@@ -66,7 +67,10 @@ public function blockedUsers()
     {
         return $this->belongsToMany(Article::class, 'favorites');
     }
-    
+    public function roleRequests()
+    {
+        return $this->hasMany(RoleRequest::class);
+    }
 
     protected $guarded = [];
 
@@ -74,4 +78,11 @@ public function blockedUsers()
     {
         return $this->belongsToMany(Role::class, 'role_user', 'user_id', 'role_name');
     }
+
+
+    public function scopeWriters($query)
+    {
+        return $query->where('roles', 'author');
+    
+}
 }

@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
@@ -49,9 +48,28 @@ class RegisterController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'name' => 'required|string|unique:users|max:255',
+            'email' => 'required|string|email|unique:users|max:255',
+            'password' => 'required|string|min:6|confirmed',
+            'country' => 'required|string|max:255',
+            'national_number' => ['required', 'string', 'unique:users', 'regex:/^0204\d{7}$/'],
+          
+        ],[
+            'name.required' => 'يرجى ادخال اسم المستخدم',
+            'name.unique' => 'المستخدم موجود مسبقا',
+            'name.max' => 'لا يمكن ادخال اكثر من 255 حرف',
+            'email.required' => 'يرجى ادخال الايميل',
+            'email.unique' => 'الايميل موجود مسبقا',
+            'email.email' => 'يرجى ادخال بريد إلكتروني صالح',
+            'email.max' => 'لا يمكن ادخال اكثر من 255 حرف',
+            'password.required' => 'يرجى ادخال كلمة المرور',
+            'password.min' => 'يجب أن تكون كلمة المرور مكونة من 6 أحرف على الأقل',
+            'password.confirmed' => 'تأكيد كلمة المرور لا يتطابق',
+            'country.required' => 'يرجى ادخال الدولة',
+            'country.max' => 'لا يمكن ادخال اكثر من 255 حرف',
+            'national_number.required' => 'يرجى ادخال الرقم الوطني',
+            'national_number.unique' => 'الرقم الوطني موجود مسبقا',
+            'national_number.regex' => 'الرقم الوطني يجب أن يكون مكونا من 11 خانة ويبدأ بـ 0204',
         ]);
     }
 
@@ -69,6 +87,7 @@ class RegisterController extends Controller
             'country' => $data['country'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
+        
         ]);
     }
 }

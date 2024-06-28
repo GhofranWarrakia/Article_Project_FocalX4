@@ -25,20 +25,22 @@ public function index()
 
     public function block(Request $request)
     {
-        Block::create([
+        $blockedAuthor= Block::create([
             'blocker_id' => auth()->id(),
             'blocked_id' => $request->blocked_id,
         ]);
 
-        return redirect()->back()->with('message', 'User blocked successfully');
+        return redirect()->back()->with('message', 'تم الحظر الكاتب');
+        return response()->json($blockedAuthor, 201);
     }
 
     public function unblock(Request $request)
     {
-        Block::where('blocker_id', auth()->id())
+        $unblockedAuthor=  Block::where('blocker_id', auth()->id())
             ->where('blocked_id', $request->blocked_id)
             ->delete();
 
-        return redirect()->back()->with('message', 'User unblocked successfully');
+        return redirect()->back()->with('message', 'تم رفع الحظر عن الكاتب ');
+        return response()->json($unblockedAuthor, 201);
     }
 }

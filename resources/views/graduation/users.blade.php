@@ -141,6 +141,10 @@
                         <form action="{{ route('users.store') }}" method="post">
                             {{ csrf_field() }}
                             <div class="form-group">
+                            
+                                <input type="hidden" class="form-control" id="id" name="id" >
+                            </div>
+                            <div class="form-group">
                                 <label for="exampleInputEmail">اسم المستخدم</label>
                                 <input type="text" class="form-control" id="name" name="name" required>
                             </div>
@@ -170,24 +174,13 @@
                             </div>
                             <div class="form-group">
                                 <label for="exampleInputEmail">صلاحية المستخدم</label>
-                                {{-- <input type="text" class="form-control" id="country" name="country" required> --}}
-                                {{-- {!! Form::select('roles_name[]', $roles,[], ['class' => 'form-control', 'multiple']) !!} --}}
-                                {{-- {!! Form::select('roles_name[]', $roles, [], ['class' => 'form-control', 'multiple']) !!} --}}
-                                {{-- <label for="exampleInputEmail">صلاحية المستخدم</label>
-                                <select name="roles_name[]" class="form-control" multiple>
-                                @foreach($roles as $roleId => $roleName)
-                                <option value="{{ $roleId }}">{{ $roleName }}</option>
-                                @endforeach
-                                </select>
-                                --}}
+                              
                                 <select name="roles_name[]" class="form-control" multiple>
                                 @foreach($roles as $roleId => $roleName)
                                     <option value="{{ $roleId }}" {{ in_array($roleId, old('roles_name', [])) ? 'selected' : '' }}>{{ $roleName }}</option>
                                 @endforeach
                             </select>
-                            {{-- @foreach($users->roles_name as $role)
-                            {{ $role->name }}
-                        @endforeach --}}
+        
                         
                             </div>
                             <div class="modal-footer">

@@ -29,26 +29,30 @@ class Controller extends BaseController
 
         // dd($request->all());
 
-    $validateData=$request->validate([
-    'name'=>'required|unique:users|max:255',
-    'email'=>'required|unique:users|max:255',
-    'roles_name' => 'required|array',
-
-    ],[
-        'name.required'=>' يرجى ادخال اسم المستخدم',
-        'name.unique'=>' المستخدم موجود مسبقا',
-        'name.max'=>' لا يمكن ادخال اكثر من 255 حرف '  ,
-        'email.unique'=>' الايميل موجود مسبقا',
-        'email.required'=>' يرجى ادخال الايميل',
-        ' password.required' => ' يرجى ادخال كلمة المرور',
-        'password.min' => ' يجب أن تكون كلمة المرور مكونة من 6 أحرف على الأقل',
-        'country.required' => ' يرجى ادخال الدولة',
-        'national_number.required' => ' يرجى ادخال الرقم الوطني',
-        'national_number.unique' => ' الرقم الوطني موجود مسبقا',
-        'roles_name.required' => ' يرجى اختيار صلاحية واحدة على الأقل',
-        'status.required' => ' يرجى تحديد حالة المستخدم',
-    ]);
-
+        $validateData = $request->validate([
+            'name' => 'required|unique:users|max:255',
+            'email' => 'required|unique:users|max:255',
+            'password' => 'required|min:6',
+            'country' => 'required',
+            'national_number' => ['required', 'unique:users', 'regex:/^0204\d{7}$/'],
+            'roles_name' => 'required',
+            'status' => 'required',
+        ],[
+            'name.required' => 'يرجى ادخال اسم المستخدم',
+            'name.unique' => 'المستخدم موجود مسبقا',
+            'name.max' => 'لا يمكن ادخال اكثر من 255 حرف',
+            'email.required' => 'يرجى ادخال الايميل',
+            'email.unique' => 'الايميل موجود مسبقا',
+            'password.required' => 'يرجى ادخال كلمة المرور',
+            'password.min' => 'يجب أن تكون كلمة المرور مكونة من 6 أحرف على الأقل',
+            'country.required' => 'يرجى ادخال الدولة',
+            'national_number.required' => 'يرجى ادخال الرقم الوطني',
+            'national_number.unique' => 'الرقم الوطني موجود مسبقا',
+            'national_number.regex' => 'الرقم الوطني يجب أن يكون مكونا من 11 خانة ويبدأ بـ 0204',
+            'roles_name.required' => 'يرجى اختيار صلاحية واحدة على الأقل',
+            'status.required' => 'يرجى تحديد حالة المستخدم',
+        ]);
+        
     $user = new User();
     $user->name = $request->name;
     $user->email = $request->email;

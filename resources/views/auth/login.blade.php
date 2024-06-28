@@ -21,7 +21,7 @@
 							<div class="row">
 								<div class="col-md-10 col-lg-10 col-xl-9 mx-auto">
 									<div class="card-sigin">
-										<div class="mb-5 d-flex"> <a href="{{ url('/' . $page='Home') }}"><img src="{{URL::asset('assets/img/brand/Screenshot (1064).png')}}" class="sign-favicon ht-40" alt="logo"></a><h1 class="main-logo1 ml-1 mr-0 my-auto tx-28"><span></span></h1></div>
+										<div class="mb-5 d-flex"> <a href="{{ url('/' . $page='') }}"><img src="{{URL::asset('assets/img/brand/Screenshot (1064).png')}}" class="sign-favicon ht-40" alt="logo"></a><h1 class="main-logo1 ml-1 mr-0 my-auto tx-28"><span></span></h1></div>
 										<div class="card-sigin">
 											<div class="main-signup-header">
 												<h2 style="color: orange;">أهلا بك في موقعنا </h2>
@@ -100,7 +100,7 @@
                 <div class="col-md-6 col-lg-6 col-xl-7 d-none d-md-flex bg-primary-transparent">
 					<div class="row wd-100p mx-auto text-center">
 						<div class="col-md-12 col-lg-12 col-xl-12 my-auto mx-auto wd-100p">
-							<img src="{{URL::asset('assets/img/media/login.png')}}" class="my-auto ht-xl-80p wd-md-100p wd-xl-80p mx-auto" alt="logo">
+						<img src="{{ URL::asset('public/images/pexels-cottonbro-4865545.jpg') }}" class="my-auto ht-xl-80p wd-md-100p wd-xl-80p mx-auto" alt="موقع المقالات ">
 						</div>
 					</div>
 				</div>

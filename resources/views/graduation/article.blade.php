@@ -76,15 +76,13 @@
         <label for="category_id">البحث عن مقالة حسب النوع:</label>
         <select name="category_id" id="category_id" class="form-control" onchange="this.form.submit()">
             <option value="" {{ $selectedCategory = '' ? 'selected' : '' }}>-- جميع المقالات --</option>
-            <option value="favorites" {{ $selectedCategory == 'favorites' ? 'selected' : '' }}>المقالات المفضلة</option>
+            <option value="favorites" {{ $selectedCategory = 'favorites' ? 'selected' : '' }}>المقالات المفضلة</option>
             @foreach ($categories as $category)
                 <option value="{{ $category->id }}" {{ $selectedCategory = $category->id ? 'selected' : '' }}>{{ $category->name }}</option>
             @endforeach
         </select>
     </div>
 </form>
-
-
                         <table id="example1" class="table key-buttons text-md-nowrap" data-page-length='50'>
                             <thead>
                                 <tr>

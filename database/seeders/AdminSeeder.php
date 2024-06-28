@@ -28,7 +28,7 @@ class AdminSeeder extends Seeder
         'name'=>'Abrar',
         'email'=>'roro@gmail.com',
         'password'=>Hash::make('abrar1234'),
-        'national_number' => '1234567890',
+        'national_number' => '02040636789',
         'country' => 'Syria',
         'roles_name'=>['owner'],
         'status'=>'مفعل'
@@ -46,10 +46,10 @@ class AdminSeeder extends Seeder
 
     // Create the second user
     $user2 = User::create([
-        'name'=>'Ahmad',
-        'email'=>'ahmad@gmail.com',
-        'password'=>Hash::make('ahmad1234'),
-        'national_number' => '0987654321',
+        'name'=>'Ghofran',
+        'email'=>'Warrakiah@gmail.com',
+        'password'=>Hash::make('ghofran1234'),
+        'national_number' => '02040654743',
         'country' => 'Syria',
         'roles_name'=>['Admin'],
         'status'=>'مفعل'
